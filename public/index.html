@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parça-AI · hype vision</title>
+<link rel="icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<script>try{const t=localStorage.getItem('theme')||'"light"';const v=JSON.parse(t);document.documentElement.dataset.theme=v==='dark'||(v==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'}catch{}</script>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<section id="login" class="hidden">
+  <div class="lg-l">
+    <div style="display:flex;align-items:center;gap:10px"><img src="img/logo.png" style="height:24px" alt="hype vision"><span class="tag">Parça-AI</span></div>
+    <form id="loginForm">
+      <span class="chip-s">B2B Parça Karşılaştırma</span>
+      <h1>Tekrar hoş geldin</h1>
+      <p class="muted" style="margin:0 0 8px">Hesabına giriş yap ve aramaya başla.</p>
+      <label class="f">Kullanıcı adı</label>
+      <input class="inp" id="lu" autocomplete="username" required>
+      <label class="f">Şifre</label>
+      <input class="inp" id="lp" type="password" autocomplete="current-password" required>
+      <button class="btn btn-dark" style="width:100%;margin-top:22px;padding:13px">Giriş yap</button>
+      <div class="err" id="lerr"></div>
+    </form>
+    <small class="muted">© 2026 hype vision · Parça-AI</small>
+  </div>
+  <div class="lg-r">
+    <div class="mock">
+      <div><span>SedaFord · SPK 6221</span><b>160,50 ₺</b></div>
+      <div><span>Biparca · APD 45230017</span><b>11,66 ₺</b></div>
+      <div><span>4 toptancı · 204 sonuç</span><b>3,8 sn</b></div>
+    </div>
+    <h2>Tüm toptancılar,<br>tek ekranda.</h2>
+    <p>Parça numarasını bir kez yaz; tüm B2B platformlarda aynı anda ara, en ucuz tedarikçiyi bul, siparişini en uygun dağılımla planla.</p>
+  </div>
+</section>
+
+<!-- ============ APP ============ -->
+<div id="app" class="hidden">
+  <aside id="side">
+    <div class="brand"><img class="l" src="img/logo.png" alt="hype vision"><span class="tag">Parça-AI</span></div>
+    <button class="btn btn-dark new-btn" data-go="ara"><svg class="i"><use href="#i-plus"/></svg>Yeni Arama</button>
+    <button class="nav" data-go="panel"><svg class="i"><use href="#i-home"/></svg>Panel</button>
+    <button class="nav" data-go="ara"><svg class="i"><use href="#i-search"/></svg>Parça Ara</button>
+    <button class="nav" data-go="toplu"><svg class="i"><use href="#i-file"/></svg>Toplu Arama</button>
+    <button class="nav" data-go="gecmis"><svg class="i"><use href="#i-clock"/></svg>Arama Geçmişi</button>
+    <div class="sec">Satın Alma</div>
+    <button class="nav" data-go="sepet"><svg class="i"><use href="#i-cart"/></svg>Sepetler & Plan<span class="cnt" id="cartCnt">0</span></button>
+    <button class="nav" data-go="takip"><svg class="i"><use href="#i-eye"/></svg>Takip Listesi<span class="cnt" id="watchCnt">0</span></button>
+    <button class="nav" data-go="kampanya"><svg class="i"><use href="#i-tag"/></svg>Kampanya & Yeni</button>
+    <button class="nav" data-go="rapor"><svg class="i"><use href="#i-spark"/></svg>AI Raporlar</button>
+    <div class="sec">Yönetim</div>
+    <button class="nav" data-go="entegrasyon"><svg class="i"><use href="#i-plug"/></svg>Entegrasyonlar<span class="cnt" id="supCnt">0</span></button>
+    <button class="nav admin-only" data-go="uyeler"><svg class="i"><use href="#i-users"/></svg>Üyeler</button>
+    <button class="nav" data-go="ayarlar"><svg class="i"><use href="#i-gear"/></svg>Ayarlar</button>
+    <div class="grow"></div>
+    <div class="me">
+      <div class="av" id="meAv">E</div>
+      <div style="flex:1;min-width:0"><div class="n" id="meName">Emre</div><div class="r" id="meRole">Yönetici</div></div>
+      <button class="btn btn-ghost icon-btn" id="themeBtn" title="Tema"><svg class="i"><use href="#i-moon"/></svg></button>
+      <button class="btn btn-ghost icon-btn" id="logoutBtn" title="Çıkış"><svg class="i"><use href="#i-out"/></svg></button>
+    </div>
+  </aside>
+
+  <div>
+    <div class="mtop">
+      <button class="btn icon-btn" id="menuBtn"><svg class="i"><use href="#i-menu"/></svg></button>
+      <img src="img/logo.png" alt="">
+      <button class="btn icon-btn bell-btn"><svg class="i"><use href="#i-bell"/></svg><span class="bdot hidden"></span></button>
+    </div>
+    <div class="topbar">
+      <div class="small muted" id="topInfo"></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-sm" data-go="sepet"><svg class="i"><use href="#i-cart"/></svg><span id="topCart">Sepet</span></button>
+        <button class="btn icon-btn bell-btn" title="Bildirimler"><svg class="i"><use href="#i-bell"/></svg><span class="bdot hidden"></span></button>
+      </div>
+    </div>
+    <div class="npanel hidden" id="npanel">
+      <div class="nph"><b>Bildirimler</b><button class="btn btn-xs btn-ghost" id="readAll">Tümünü okundu say</button></div>
+      <div id="nlist"></div>
+    </div>
+    <main id="view"></main>
+  </div>
+</div>
+
+<div class="modal hidden" id="modal"><div class="card" id="modalBody"></div></div>
+
+<!-- icons (lucide tarzı) -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a1 1 0 0 0 1 .8h9.6a1 1 0 0 0 1-.8L21 7H6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+  <symbol id="i-tl" viewBox="0 0 24 24"><path d="M9 3v14a4 4 0 0 0 8-1M5 10l8-3M5 14l8-3"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8M21 4v5h-5M3 20v-5h5"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1a4 4 0 0 1-2-2l1-1-1-2z"/></symbol>
+  <symbol id="i-window" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9 5 3h14l2 6M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0zM5 13v8h14v-8"/></symbol>
+</svg>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

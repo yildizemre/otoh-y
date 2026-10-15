@@ -1,0 +1,7 @@
+node_modules/
+# Gizli veriler: toptancı şifreleri, oturum çerezleri, kullanıcılar, arama geçmişi
+data/
+.env
+*.png
+!public/img/*.png
+*.log

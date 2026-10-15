@@ -1,0 +1,22 @@
+{
+  "name": "parca-ai",
+  "version": "1.0.0",
+  "description": "B2B oto yedek parça toptancı karşılaştırma platformu (hype vision Parça-AI)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:goster": "node server.js --goster",
+    "postinstall": "playwright install chromium"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0",
+    "playwright": "^1.64.1"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "private": true
+}
