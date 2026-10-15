@@ -44,6 +44,14 @@ docker run -d -p 3000:3000 -v parca-data:/data --name parca-ai parca-ai
 
 Railway, Render, Fly.io veya herhangi bir VPS üzerinde bu Dockerfile ile çalışır. Kalıcı disk (`/data`) bağlanmalıdır.
 
-> **Netlify / Vercel uygun değildir**: uygulama sürekli açık duran bir sunucu ve Chromium tarayıcı gerektirir (oturum tutma, zamanlanmış kontroller). Bu platformlar yalnızca statik site ve kısa ömürlü fonksiyon çalıştırır.
+### Netlify + Render
+
+Netlify tek başına backend'i çalıştıramaz (sürekli açık sunucu + Chromium gerekir). Kurulum:
+
+1. **Render** → New → Blueprint → bu repo (`render.yaml` backend'i Docker ile kurar, 1 GB kalıcı disk bağlar).
+2. Render'ın verdiği adresi `netlify.toml` içindeki `/api/*` yönlendirmesine yaz, pushla.
+3. **Netlify** arayüzü `public/` klasöründen yayınlar ve `/api` isteklerini Render'a iletir.
+
+İstersen Netlify'ı hiç kullanmadan doğrudan Render adresini de açabilirsin; arayüz backend ile birlikte gelir.
 
 > **Şener notu**: doğrulama kodlu girişte görünür tarayıcı penceresi açılır; ekransız sunucuda bu adım yapılamaz. Sunucu kurulumunda Şener oturumu yerelde açılıp `data/sessions/sener.json` dosyası sunucuya kopyalanmalı veya uzak masaüstü (VNC) kullanılmalıdır.

@@ -1,0 +1,14 @@
+# Render Blueprint: backend (Docker + Chromium) — https://render.com → New → Blueprint → bu repo
+services:
+  - type: web
+    name: parca-ai
+    runtime: docker
+    plan: starter
+    healthCheckPath: /
+    envVars:
+      - key: DATA_DIR
+        value: /data
+    disk:
+      name: parca-data
+      mountPath: /data
+      sizeGB: 1

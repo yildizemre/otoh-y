@@ -11,7 +11,8 @@ const toast = m => { const t = document.createElement('div'); t.className = 'toa
 async function api(url, opt = {}) {
   const r = await fetch(url, { ...opt, headers: { 'Content-Type': 'application/json' }, body: opt.body && JSON.stringify(opt.body) });
   if (r.status === 401 && !url.endsWith('/login')) { showLogin(); throw new Error('Oturum kapandı'); }
-  const j = await r.json().catch(() => ({}));
+  const j = await r.json().catch(() => null);
+  if (!j) throw new Error('Sunucuya ulaşılamıyor — backend çalışmıyor olabilir (bkz. README: Sunucuya kurulum)');
   if (!r.ok) throw new Error(j.error || 'Hata');
   return j;
 }
