@@ -1,6 +1,6 @@
 # Netlify sadece arayüzü (public/) yayınlar.
 # Arama / toptancı bağlantıları için backend ayrı çalışmalı (Render, Railway, VPS — bkz. README).
-# Backend adresi belli olunca aşağıdaki /api yönlendirmesindeki adresi değiştirin.
+# Backend: orbisoft VPS (Docker, port 3010)
 
 [build]
   publish = "public"
@@ -8,6 +8,6 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "https://parca-ai.onrender.com/api/:splat"
+  to = "http://104.249.19.177:3010/api/:splat"
   status = 200
   force = true

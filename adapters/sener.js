@@ -37,9 +37,12 @@ function parse(page) {
     const num = s => parseFloat(String(s).replace(/[^\d,]/g, '').replace(',', '.')) || 0;
     // Başlıklar: Stok Kodu, Ürün Adı, Resim, Oem, Marka, Birim, Liste, Net, KDV'li, İskonto, Mrkz, Adn, Sam, Ank, Den
     const depoAd = ['Merkez', 'Adana', 'Samsun', 'Ankara', 'Denizli'];
-    return trs.filter(tr => tr.querySelector('td.StokKod')).map(tr => {
-      const td = [...tr.querySelectorAll('td')];
-      const k = td.findIndex(c => c.classList.contains('StokKod'));
+    // Ham cevapta hücrelerde sınıf yok → sütunu başlık sırasından bul
+    const th = document.querySelector('th.StokKod');
+    const heads = th ? [...th.closest('tr').children].map(h => txt(h).toLocaleUpperCase('tr')) : [];
+    const k = Math.max(0, heads.findIndex(h => h.startsWith('STOK KODU')));
+    return trs.filter(tr => tr.querySelector('td') && !tr.querySelector('th') && /\d\s*TL\b/.test(tr.textContent)).map(tr => {
+      const td = [...tr.children];
       const at = i => td[k + i];
       const fiyatlar = td.filter(c => /TL\s*$/.test(txt(c))).map(c => num(txt(c)));
       const stokImgs = td.map(c => c.querySelector('img[title]')).filter(i => i && /Var|Yok|truck|kritik|malkabul/i.test(i.title + i.src));
