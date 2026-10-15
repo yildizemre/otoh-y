@@ -1,6 +1,6 @@
 # Netlify sadece arayüzü (public/) yayınlar.
 # Arama / toptancı bağlantıları için backend ayrı çalışmalı (Render, Railway, VPS — bkz. README).
-# Backend: orbisoft VPS (Docker, port 3010)
+# Backend: https://parca.hypevisionlab.com (orbisoft VPS, Docker + nginx + Let's Encrypt)
 
 [build]
   publish = "public"
@@ -8,6 +8,6 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "http://104.249.19.177:3010/api/:splat"
+  to = "https://parca.hypevisionlab.com/api/:splat"
   status = 200
   force = true
